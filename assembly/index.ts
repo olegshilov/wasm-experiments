@@ -1,16 +1,26 @@
+export class OptionalFloat64Value {
+  public value: f64;
+  public isEmpty: bool;
+
+  constructor(value: f64, isEmpty: bool) {
+    this.value = value;
+    this.isEmpty = isEmpty;
+  }
+}
+
 export class ChartPoint {
   index: f64;
   millis: f64;
-  balance: f64;
-  equity: f64;
-  isLoop: boolean;
+  balance: OptionalFloat64Value;
+  equity: OptionalFloat64Value;
+  isLoop: bool;
 
   constructor(
     index: f64,
     millis: f64,
-    balance: f64,
-    equity: f64,
-    isLoop: boolean
+    balance: OptionalFloat64Value,
+    equity: OptionalFloat64Value,
+    isLoop: bool
   ) {
     this.index = index;
     this.millis = millis;
@@ -21,26 +31,26 @@ export class ChartPoint {
 }
 
 export class LastValues {
-  balance: f64;
-  equity: f64;
+  public balance: OptionalFloat64Value;
+  public equity: OptionalFloat64Value;
 
-  constructor(balance: f64, equity: f64) {
+  constructor(balance: OptionalFloat64Value, equity: OptionalFloat64Value) {
     this.balance = balance;
     this.equity = equity;
   }
 }
 
 export class ReturnValue {
-  value: f64;
-  loopValue: f64;
-  unalteredGapValue: f64;
-  lastValue: f64;
+  value: OptionalFloat64Value;
+  loopValue: OptionalFloat64Value;
+  unalteredGapValue: OptionalFloat64Value;
+  lastValue: OptionalFloat64Value;
 
   constructor(
-    value: f64,
-    loopValue: f64,
-    unalteredGapValue: f64,
-    lastValue: f64
+    value: OptionalFloat64Value,
+    loopValue: OptionalFloat64Value,
+    unalteredGapValue: OptionalFloat64Value,
+    lastValue: OptionalFloat64Value
   ) {
     this.value = value;
     this.loopValue = loopValue;
@@ -49,72 +59,44 @@ export class ReturnValue {
   }
 }
 
-// export function getValues(currentPoint: ChartPoint): ReturnValue {
-//   const index = currentPoint.index;
-//   const millis = currentPoint.millis;
-//   const balance = currentPoint.balance;
-//   trace("getValues", 3, index, millis, balance);
-
-//   return new ReturnValue(index, millis, balance);
-// }
-
 export function getValues(
-  isBalance: boolean,
+  isBalance: bool,
   currentPoint: ChartPoint,
   prevPoint: ChartPoint | null,
   nextPoint: ChartPoint | null,
   lastValues: LastValues
 ): ReturnValue {
-  trace(isBalance ? "get balance" : "get equity", 0);
-  trace(
-    "currentPoint",
-    4,
-    currentPoint.index,
-    currentPoint.millis,
-    currentPoint.balance,
-    currentPoint.equity
-  );
-  if (prevPoint) {
-    trace(
-      "prevPoint",
-      4,
-      prevPoint.index,
-      prevPoint.millis,
-      prevPoint.balance,
-      prevPoint.equity
-    );
-  } else {
-  }
-  if (nextPoint) {
-    trace(
-      "nextPoint",
-      4,
-      nextPoint.index,
-      nextPoint.millis,
-      nextPoint.balance,
-      nextPoint.equity
-    );
-  }
-  trace("lastValues", 2, lastValues.balance, lastValues.equity);
-
-  const hasPrevPoint = !isNullable(prevPoint);
-  const hasNextPoint = !isNullable(nextPoint);
-  const isPrevPointLoop = hasPrevPoint ? (<ChartPoint>nextPoint).isLoop : false;
-  const isNextPointLoop = hasNextPoint ? (<ChartPoint>nextPoint).isLoop : false;
-  const currentValue = isBalance ? currentPoint.balance : currentPoint.equity;
-  const isLoop = currentPoint.isLoop;
-  let isNextPointValueEmpty = true;
-  if (hasNextPoint) {
-    if (isBalance) {
-      isNextPointValueEmpty = !isNullable((<ChartPoint>nextPoint).balance);
+  trace(isBalance ? "## get balance" : "## get equity", 0);
+  if (isBalance) {
+    if (lastValues.balance.isEmpty) {
+      trace("last balance: null", 0);
     } else {
-      isNextPointValueEmpty = !isNullable((<ChartPoint>nextPoint).equity);
+      trace("last balance:", 1, lastValues.balance.value);
+    }
+  } else {
+    if (lastValues.equity.isEmpty) {
+      trace("last equity: null", 0);
+    } else {
+      trace("last equity:", 1, lastValues.equity.value);
     }
   }
 
-  let value: f64;
-  let loopValue: f64;
-  let unalteredGapValue: f64;
+  const isPrevPointLoop = prevPoint ? prevPoint.isLoop : false;
+  const isNextPointLoop = nextPoint ? nextPoint.isLoop : false;
+  const currentValue = isBalance ? currentPoint.balance : currentPoint.equity;
+  const isLoop = currentPoint.isLoop;
+  let isNextPointValueEmpty = <bool>true;
+  if (nextPoint) {
+    if (isBalance) {
+      isNextPointValueEmpty = nextPoint.balance.isEmpty;
+    } else {
+      isNextPointValueEmpty = nextPoint.equity.isEmpty;
+    }
+  }
+
+  let value = new OptionalFloat64Value(0, true);
+  let loopValue = new OptionalFloat64Value(0, true);
+  let unalteredGapValue = new OptionalFloat64Value(0, true);
 
   if (isLoop) {
     const isFirstLoopPoint = !isPrevPointLoop;
@@ -123,18 +105,18 @@ export function getValues(
     if (isFirstLoopPoint || !isNextPointLoop) {
       value = currentValue;
     }
-    if (hasNextPoint && isNextPointValueEmpty && !isNextPointLoop) {
+    if (nextPoint && isNextPointValueEmpty && !isNextPointLoop) {
       unalteredGapValue = currentValue;
     }
   } else {
-    if (isNullable(currentValue)) {
+    if (!currentValue.isEmpty) {
       unalteredGapValue = isBalance ? lastValues.balance : lastValues.equity;
-      if (hasNextPoint && !isNextPointValueEmpty) {
+      if (nextPoint && !isNextPointValueEmpty) {
         value = isBalance ? lastValues.balance : lastValues.equity;
       }
     } else {
       value = currentValue;
-      if (isNextPointValueEmpty && hasNextPoint && !isNextPointLoop) {
+      if (isNextPointValueEmpty && nextPoint && !isNextPointLoop) {
         unalteredGapValue = currentValue;
       }
     }
