@@ -66,53 +66,34 @@ export function getValues(
   nextPoint: ChartPoint | null,
   lastValues: LastValues
 ): ReturnValue {
-  trace(isBalance ? "## get balance" : "## get equity", 0);
-  if (isBalance) {
-    if (lastValues.balance.isEmpty) {
-      trace("last balance: null", 0);
-    } else {
-      trace("last balance:", 1, lastValues.balance.value);
-    }
-  } else {
-    if (lastValues.equity.isEmpty) {
-      trace("last equity: null", 0);
-    } else {
-      trace("last equity:", 1, lastValues.equity.value);
-    }
-  }
-
   const isPrevPointLoop = prevPoint ? prevPoint.isLoop : false;
   const isNextPointLoop = nextPoint ? nextPoint.isLoop : false;
   const currentValue = isBalance ? currentPoint.balance : currentPoint.equity;
-  const isLoop = currentPoint.isLoop;
-  let isNextPointValueEmpty = <bool>true;
-  if (nextPoint) {
-    if (isBalance) {
-      isNextPointValueEmpty = nextPoint.balance.isEmpty;
-    } else {
-      isNextPointValueEmpty = nextPoint.equity.isEmpty;
-    }
-  }
+  const lastValue = isBalance ? lastValues.balance : lastValues.equity;
 
   let value = new OptionalFloat64Value(0, true);
   let loopValue = new OptionalFloat64Value(0, true);
   let unalteredGapValue = new OptionalFloat64Value(0, true);
+  let isNextPointValueEmpty = <bool>true;
+  if (nextPoint) {
+    isNextPointValueEmpty = isBalance
+      ? nextPoint.balance.isEmpty
+      : nextPoint.equity.isEmpty;
+  }
 
-  if (isLoop) {
-    const isFirstLoopPoint = !isPrevPointLoop;
-
+  if (currentPoint.isLoop) {
     loopValue = currentValue;
-    if (isFirstLoopPoint || !isNextPointLoop) {
+    if (!isPrevPointLoop || !isNextPointLoop) {
       value = currentValue;
     }
     if (nextPoint && isNextPointValueEmpty && !isNextPointLoop) {
       unalteredGapValue = currentValue;
     }
   } else {
-    if (!currentValue.isEmpty) {
-      unalteredGapValue = isBalance ? lastValues.balance : lastValues.equity;
+    if (currentValue.isEmpty) {
+      unalteredGapValue = lastValue;
       if (nextPoint && !isNextPointValueEmpty) {
-        value = isBalance ? lastValues.balance : lastValues.equity;
+        value = lastValue;
       }
     } else {
       value = currentValue;
@@ -122,5 +103,10 @@ export function getValues(
     }
   }
 
-  return new ReturnValue(value, loopValue, unalteredGapValue, currentValue);
+  return new ReturnValue(
+    value,
+    loopValue,
+    unalteredGapValue,
+    currentValue.isEmpty ? lastValue : currentValue
+  );
 }

@@ -28,24 +28,24 @@ type LastValues = {
 };
 
 const sourceBEChartPoint: BEChartPoint[] = [
-  { index: 0, millis: 1, balance: 100, equity: 100, is_loop: false },
-  { index: 1, millis: 2, balance: 100, equity: 101, is_loop: false },
-  { index: 2, millis: 3, balance: 101, equity: 102, is_loop: true },
-  { index: 3, millis: 3, balance: 102, equity: 102, is_loop: true },
-  { index: 4, millis: 3, balance: 103, equity: 102, is_loop: true },
-  { index: 5, millis: 4, balance: 102, equity: 104, is_loop: false },
-  { index: 6, millis: 5, balance: 100, equity: 104, is_loop: false },
-  { index: 7, millis: 6, balance: null, equity: 105, is_loop: false },
-  { index: 8, millis: 7, balance: null, equity: 105, is_loop: false },
-  { index: 9, millis: 8, balance: null, equity: 105, is_loop: false },
-  { index: 10, millis: 9, balance: 103, equity: 106, is_loop: false },
-  { index: 11, millis: 10, balance: 102, equity: 106, is_loop: false },
-  { index: 12, millis: 11, balance: 101, equity: 103, is_loop: true },
-  { index: 13, millis: 11, balance: 100, equity: 105, is_loop: true },
-  { index: 14, millis: 11, balance: 102, equity: 103, is_loop: true },
-  { index: 15, millis: 12, balance: null, equity: 104, is_loop: false },
-  { index: 16, millis: 13, balance: null, equity: 103, is_loop: false },
-  { index: 17, millis: 14, balance: null, equity: 105, is_loop: false },
+  { index: 0, millis: 0.1, balance: 100, equity: 100, is_loop: false },
+  { index: 1, millis: 0.2, balance: 100, equity: 101, is_loop: false },
+  { index: 2, millis: 0.3, balance: 101, equity: 102, is_loop: true },
+  { index: 3, millis: 0.3, balance: 102, equity: 102, is_loop: true },
+  { index: 4, millis: 0.3, balance: 103, equity: 102, is_loop: true },
+  { index: 5, millis: 0.4, balance: 102, equity: 104, is_loop: false },
+  { index: 6, millis: 0.5, balance: 100, equity: 104, is_loop: false },
+  { index: 7, millis: 0.6, balance: null, equity: 105, is_loop: false },
+  { index: 8, millis: 0.7, balance: null, equity: 105, is_loop: false },
+  { index: 9, millis: 0.8, balance: null, equity: 105, is_loop: false },
+  { index: 10, millis: 0.9, balance: 103, equity: 106, is_loop: false },
+  { index: 11, millis: 0.1, balance: 102, equity: 106, is_loop: false },
+  { index: 12, millis: 0.11, balance: 101, equity: 103, is_loop: true },
+  { index: 13, millis: 0.11, balance: 100, equity: 105, is_loop: true },
+  { index: 14, millis: 0.11, balance: 102, equity: 103, is_loop: true },
+  { index: 15, millis: 0.12, balance: null, equity: 104, is_loop: false },
+  { index: 16, millis: 0.13, balance: null, equity: 103, is_loop: false },
+  { index: 17, millis: 0.14, balance: null, equity: 105, is_loop: false },
 ];
 
 const expectedReducedPoints: ChartUpdate = {
@@ -220,7 +220,7 @@ let lastValues: LastValues = {
     const accumulator = await accumulatorPromise;
     const prevPoint = index - 1 >= 0 ? array[index - 1] : undefined;
     const nextPoint = index + 1 <= array.length ? array[index + 1] : undefined;
-    const ts = currentPoint.millis;
+    const ts = Math.floor(currentPoint.millis);
 
     const currentPointWasm = new ChartPoint(
       currentPoint.index,
@@ -285,7 +285,6 @@ let lastValues: LastValues = {
       balance: parseOptionalValue(lastBalanceValue),
       equity: parseOptionalValue(lastEquityValue),
     };
-    console.debug({ lastValues });
 
     accumulator.index.push(currentPoint.index);
     accumulator.ts.push(ts);
