@@ -1,0 +1,16 @@
+node_modules/
+.idea/
+.env
+*.log
+
+# Yarn 2
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+tags
+
+.parcel-cache/
+dist/

@@ -1,0 +1,28 @@
+{
+  "name": "wasm-learn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Oleg Shilov <me@olegshilov.com>",
+  "license": "MIT",
+  "scripts": {
+    "build:untouched": "yarn asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --sourceMap --debug -d",
+    "build:optimized": "yarn asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --optimize -d",
+    "asbuild:untouched": "asc assembly/index.ts --target debug",
+    "asbuild:optimized": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
+    "test": "node tests",
+    "watch:build": "onchange -i 'assembly/**/*' -- yarn build:untouched",
+    "watch:asbuild": "onchange -i 'assembly/**/*' -- yarn asbuild:untouched",
+    "watch:test": "onchange -i 'build/**/*' 'tests/**/*' 'index.js' -- yarn test",
+    "start": "parcel src/index.html"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.19.2",
+    "onchange": "7.1.0",
+    "parcel": "2.0.0-beta.3.1",
+    "source-map-support": "0.5.19"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "0.19.2"
+  }
+}
