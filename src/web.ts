@@ -1,5 +1,6 @@
 import loader from "@assemblyscript/loader";
 import wasmPath from "url:../build/optimized.wasm";
+// import wasmPath from "url:../build/untouched.wasm";
 
 function timeout(ms: number) {
   return new Promise((resolve) => {
@@ -11,7 +12,13 @@ function timeout(ms: number) {
 (async () => {
   console.clear();
   console.debug("init");
-  const importObject = {};
+  const importObject = {
+    env: {
+      abort() {
+        console.error("abort");
+      },
+    },
+  };
   const module = await loader.instantiateStreaming(
     fetch(wasmPath),
     importObject
@@ -22,11 +29,12 @@ function timeout(ms: number) {
   const { runWasmImplementation } = await import("./wasmImplementation");
   await timeout(1000);
 
-  const warmupCount = 1000;
-  const runCount = 10000;
+  const warmupCount = 10;
+  const runCount = 1000;
   console.debug(`start benchmark`);
   await runBaseImplementation(runCount, warmupCount);
   await timeout(1000);
   await runWasmImplementation(runCount, warmupCount, module.exports);
+  await timeout(1000);
   console.debug(`end benchmark`);
 })();
