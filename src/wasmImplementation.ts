@@ -1,4 +1,4 @@
-import { getUpdateChunk } from "./misc";
+import { ChartUpdate2, getUpdateChunk } from "./misc";
 
 export async function runWasmImplementation(
   runCount: number,
@@ -8,7 +8,7 @@ export async function runWasmImplementation(
   type: string
 ) {
   const testChunks = await getUpdateChunk(chunkSize);
-  console.debug(`[AS] ${type}: reduce ${chunkSize} chunks`);
+  console.debug(`[AS] ${type}: get loops from ${chunkSize} points`);
 
   const { __getFloat64Array, __newArray, __pin, __unpin } = wasm;
   const { Float64Array_ID, BoolArray_ID, findLoops, ReturnValue } = wasm;
@@ -25,7 +25,7 @@ export async function runWasmImplementation(
     };
   }
 
-  function getLoops(chunks: any) {
+  function getLoops(chunks: ChartUpdate2) {
     const balanceF64Array = __pin(__newArray(Float64Array_ID, chunks.balance));
     const equityF64Array = __pin(__newArray(Float64Array_ID, chunks.equity));
     const loopBoolArray = __pin(__newArray(BoolArray_ID, chunks.isLoop));

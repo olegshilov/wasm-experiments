@@ -31,30 +31,23 @@ function timeout(ms: number) {
   );
   console.debug(`optimised module loaded and ready`, optimisedModule);
 
-  // const { runBaseImplementation } = await import("./baseImplementation");
+  const { runBaseImplementation } = await import("./baseImplementation");
   const { runWasmImplementation } = await import("./wasmImplementation");
   console.debug(`implementations loaded and ready`);
   await timeout(5000);
 
-  const warmupCount = 10;
-  const runCount = 100;
+  const warmupCount = 1000;
+  const runCount = 10000;
+  const chunkSize = 100000;
 
-  // await runBaseImplementation(runCount, warmupCount, 1000000);
-  // await timeout(1000);
-  // await runBaseImplementation(runCount, warmupCount, 5000);
-  // await timeout(1000);
-  // await runBaseImplementation(runCount, warmupCount, 10000);
-  // await timeout(1000);
-  // // await runBaseImplementation(runCount, warmupCount, 50000);
-  // // await timeout(1000);
-  // // await runBaseImplementation(runCount, warmupCount, 100000);
-  // // await timeout(1000);
+  await runBaseImplementation(runCount, warmupCount, chunkSize);
+  await timeout(5000);
 
   await runWasmImplementation(
     runCount,
     warmupCount,
     untouchedModule.exports,
-    1000000,
+    chunkSize,
     "untouched"
   );
   await timeout(5000);
@@ -62,17 +55,10 @@ function timeout(ms: number) {
     runCount,
     warmupCount,
     optimisedModule.exports,
-    1000000,
+    chunkSize,
     "optimised"
   );
   await timeout(5000);
-  // await runWasmImplementation(runCount, warmupCount, module.exports, 5000);
-  // await timeout(1000);
-  // await runWasmImplementation(runCount, warmupCount, module.exports, 10000);
-  // await timeout(1000);
-  // await runWasmImplementation(runCount, warmupCount, module.exports, 50000);
-  // await timeout(1000);
-  // await runWasmImplementation(runCount, warmupCount, module.exports, 100000);
 
   console.debug(`end benchmark`);
 })();
