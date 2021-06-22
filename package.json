@@ -5,20 +5,22 @@
   "author": "Oleg Shilov <me@olegshilov.com>",
   "license": "MIT",
   "scripts": {
-    "build:untouched": "yarn asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --sourceMap --debug -d",
-    "build:optimized": "yarn asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --optimize -d",
+    "build:untouched": "yarn asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --sourceMap --debug -d --exportRuntime --transform as-bind",
+    "build:optimized": "yarn asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --optimize -d --exportRuntime --transform as-bind",
+    "build": "npm run build:untouched && npm run build:optimized",
     "asbuild:untouched": "asc assembly/index.ts --target debug",
     "asbuild:optimized": "asc assembly/index.ts --target release",
     "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
-    "test": "node tests",
+    "test": "yarn node tests",
     "watch:build": "onchange -i 'assembly/**/*' -- yarn build:optimized",
     "watch:asbuild": "onchange -i 'assembly/**/*' -- yarn asbuild:optimized",
-    "watch:test": "onchange -i 'build/**/*' 'tests/**/*' 'index.js' -- yarn test",
+    "watch:test": "onchange -i 'build/**/*' 'tests/**/*' -- yarn test",
     "start": "parcel src/index.html"
   },
   "devDependencies": {
     "@tsconfig/recommended": "1.0.1",
     "@types/benchmark": "2.1.0",
+    "as-bind": "0.7.1",
     "assemblyscript": "0.19.3",
     "benchmark": "2.1.4",
     "lodash": "4.17.21",
@@ -26,7 +28,6 @@
     "onchange": "7.1.0",
     "parcel": "2.0.0-beta.3.1",
     "source-map-support": "0.5.19",
-    "ts-node": "10.0.0",
     "typescript": "4.3.2"
   },
   "dependencies": {

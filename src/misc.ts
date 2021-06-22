@@ -16,6 +16,13 @@ export type ChartUpdate = {
   equityLoop: (number | null)[];
   equityUnalteredGap: (number | null)[];
 };
+export type ChartUpdate2 = {
+  index: number[];
+  ts: number[];
+  balance: number[];
+  equity: number[];
+  isLoop: boolean[];
+};
 
 export type LastValues = {
   balance: number | null;
@@ -42,6 +49,31 @@ export const sourceBEChartPoint: BEChartPoint[] = [
   { index: 16, millis: 0.13, balance: null, equity: 103, is_loop: false },
   { index: 17, millis: 0.14, balance: null, equity: 105, is_loop: false },
 ];
+
+export const reducedPoints = sourceBEChartPoint.reduce(
+  (accumulator: ChartUpdate2, currentPoint: BEChartPoint) => {
+    accumulator.index.push(currentPoint.index);
+    accumulator.ts.push(Math.floor(currentPoint.millis));
+    accumulator.balance.push(currentPoint.balance ?? NaN);
+    accumulator.equity.push(currentPoint.equity ?? NaN);
+    accumulator.isLoop.push(currentPoint.is_loop);
+
+    return {
+      index: accumulator.index,
+      ts: accumulator.ts,
+      balance: accumulator.balance,
+      equity: accumulator.equity,
+      isLoop: accumulator.isLoop,
+    };
+  },
+  {
+    index: [],
+    ts: [],
+    balance: [],
+    equity: [],
+    isLoop: [],
+  }
+);
 
 export const expectedReducedPoints: ChartUpdate = {
   index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
@@ -167,3 +199,37 @@ export const expectedReducedPoints: ChartUpdate = {
     null,
   ],
 };
+
+export async function getChunk(chunkSize: number): Promise<BEChartPoint[]> {
+  const chunks: BEChartPoint[] = new Array(chunkSize);
+
+  for (let i = 0; i < chunks.length; i++) {
+    chunks[i] = sourceBEChartPoint[i % sourceBEChartPoint.length];
+  }
+
+  return Promise.resolve(chunks);
+}
+
+export async function getUpdateChunk(chunkSize: number): Promise<ChartUpdate2> {
+  const balance: number[] = new Array(chunkSize);
+  const equity: number[] = new Array(chunkSize);
+  const index: number[] = new Array(chunkSize);
+  const ts: number[] = new Array(chunkSize);
+  const isLoop: boolean[] = new Array(chunkSize);
+
+  for (let i = 0; i < chunkSize; i++) {
+    index[i] = reducedPoints.index[i % reducedPoints.index.length];
+    ts[i] = reducedPoints.ts[i % reducedPoints.index.length];
+    isLoop[i] = reducedPoints.isLoop[i % reducedPoints.index.length];
+    balance[i] = reducedPoints.balance[i % reducedPoints.balance.length];
+    equity[i] = reducedPoints.equity[i % reducedPoints.equity.length];
+  }
+
+  return Promise.resolve({
+    index,
+    ts,
+    isLoop,
+    balance,
+    equity,
+  });
+}

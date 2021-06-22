@@ -1,15 +1,12 @@
-import {
-  BEChartPoint,
-  ChartUpdate,
-  LastValues,
-  sourceBEChartPoint,
-} from "./misc";
+import { BEChartPoint, ChartUpdate, getChunk, LastValues } from "./misc";
 
 export async function runBaseImplementation(
   runCount: number,
-  warmupCount: number
+  warmupCount: number,
+  chunkSize: number
 ) {
-  console.debug("run base implementation");
+  const testChunks = await getChunk(chunkSize);
+  console.debug(`[JS]: reduce ${chunkSize} chunks`);
 
   const lastValues: LastValues = {
     balance: null,
@@ -124,22 +121,22 @@ export async function runBaseImplementation(
     return update;
   }
 
-  console.debug(`warm-up: ${warmupCount} times`);
-  let w = 0;
-  let wResult;
-  while (w < warmupCount) {
-    wResult = reducePoints(sourceBEChartPoint);
-    w++;
-  }
+  // console.debug(`warm-up: ${warmupCount} times`);
+  // let w = 0;
+  // let wResult;
+  // while (w < warmupCount) {
+  //   wResult = reducePoints(testChunks);
+  //   w++;
+  // }
 
-  console.debug(`start: ${runCount} times`);
-  let i = 0;
+  // console.debug(`start: ${runCount} times`);
+  // let i = 0;
   let result;
   const startTime = performance.now();
-  while (i < runCount) {
-    result = reducePoints(sourceBEChartPoint);
-    i++;
-  }
+  // while (i < runCount) {
+  result = reducePoints(testChunks);
+  // i++;
+  // }
   const endTime = performance.now() - startTime;
 
   console.debug(`total time: ${endTime}ms`);

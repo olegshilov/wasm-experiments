@@ -1,15 +1,29 @@
 const fs = require("fs");
 const path = require("path");
-const loader = require("@assemblyscript/loader");
 const Benchmark = require("benchmark");
+const loader = require("@assemblyscript/loader");
+
+console.debug("===== init ======");
+const jsonData = require("../balanceEquityData.json");
+
+const jsonchunks = jsonData
+  .map((entry) => {
+    return entry.Backtest.RequestBEChartPoints;
+  })
+  .filter((entry) => {
+    return entry.Points !== undefined;
+  })
+  .map(({ Points }) => Points);
+console.debug({ l: jsonchunks.length, l2: jsonchunks[0].length });
+console.debug("chunks prepared");
 
 const wasmModule = loader.instantiateSync(
   fs.readFileSync(path.resolve(__dirname, "../build/optimized.wasm")),
   {}
 );
-
 const { OptionalFloat64Value, ReturnValue, ChartPoint, LastValues, getValues } =
   wasmModule.exports;
+console.debug("wasm loaded");
 
 function createOptionalValue(possiblyNullableValue) {
   const isEmpty =
@@ -260,17 +274,62 @@ const sourceBEChartPoint = [
   { index: 17, millis: 0.14, balance: null, equity: 105, is_loop: false },
 ];
 
+function createChunks(samplesCount) {
+  return [0, 0, 0, 1, 1, 1];
+}
+
+console.debug(`start benchmark`);
+
+function createSetup(num) {
+  return () => {
+    let chunks = jsonchunks;
+  };
+}
 suite
-  .add("JS", function () {
-    reducePointsJS(sourceBEChartPoint);
+  // .add("JS: 1k chunks", function () {
+  //   const result = [];
+  //   for (const chunk of chunks) {
+  //     result.push(reducePointsJS(chunk));
+  //   }
+  //   return result;
+  // })
+  .add("AS: 1k chunks", {
+    fn: function () {
+      console.debug("AS: 1k", { l: chunks.length });
+      const result = [];
+      for (const chunk of chunks) {
+        result.push(reducePointsAS(chunk));
+      }
+      return result;
+    },
+    // setup: createSetup(1000),
+    setup: () => {
+      let chunks = sourceBEChartPoint;
+    },
+
+    // teardown: () => {
+    //   chunks = [];
+    // },
   })
-  .add("AS", function () {
-    reducePointsAS(sourceBEChartPoint);
-  })
+  // .add(
+  //   "AS: 10k chunks",
+  //   function () {
+  //     console.debug("AS: 10k", { l: chunks.length });
+  //     const result = [];
+  //     for (const chunk of chunks) {
+  //       result.push(reducePointsAS(chunk));
+  //     }
+  //     return result;
+  //   },
+  //   {
+  //     setup: createSetup(10000),
+  //   }
+  // )
   .on("cycle", function (event) {
     console.log(String(event.target));
   })
   .on("complete", function () {
     console.log("Fastest is " + this.filter("fastest").map("name"));
+    console.debug(`end benchmark`);
   })
-  .run({ async: true });
+  .run();

@@ -1,148 +1,82 @@
 (module
  (type $i32_i32_=>_none (func (param i32 i32)))
  (type $i32_=>_i32 (func (param i32) (result i32)))
- (type $none_=>_none (func))
- (type $i32_i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32 i32) (result i32)))
  (type $i32_=>_none (func (param i32)))
+ (type $none_=>_none (func))
  (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
- (type $i32_f64_i32_=>_i32 (func (param i32 f64 i32) (result i32)))
- (type $i32_=>_f64 (func (param i32) (result f64)))
- (type $i32_f64_=>_none (func (param i32 f64)))
+ (type $i32_i32_i32_i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32 i32 i32 i32) (result i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $none_=>_i32 (func (result i32)))
- (type $i32_f64_f64_i32_i32_i32_=>_i32 (func (param i32 f64 f64 i32 i32 i32) (result i32)))
+ (type $i32_i32_=>_f64 (func (param i32 i32) (result f64)))
+ (type $i32_i32_f64_=>_none (func (param i32 i32 f64)))
  (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
- (global $~lib/rt/itcms/total (mut i32) (i32.const 0))
- (global $~lib/rt/itcms/threshold (mut i32) (i32.const 0))
- (global $~lib/rt/itcms/state (mut i32) (i32.const 0))
- (global $~lib/rt/itcms/visitCount (mut i32) (i32.const 0))
- (global $~lib/rt/itcms/pinSpace (mut i32) (i32.const 0))
+ (global $assembly/index/Float64Array_ID i32 (i32.const 3))
+ (global $assembly/index/BoolArray_ID i32 (i32.const 4))
+ (global $assembly/index/lastValue (mut f64) (f64.const nan:0x8000000000000))
+ (global $~lib/rt/itcms/white (mut i32) (i32.const 0))
  (global $~lib/rt/itcms/iter (mut i32) (i32.const 0))
  (global $~lib/rt/itcms/toSpace (mut i32) (i32.const 0))
- (global $~lib/rt/itcms/white (mut i32) (i32.const 0))
+ (global $~lib/rt/itcms/state (mut i32) (i32.const 0))
+ (global $~lib/rt/itcms/total (mut i32) (i32.const 0))
+ (global $~lib/rt/itcms/threshold (mut i32) (i32.const 0))
+ (global $~lib/rt/itcms/visitCount (mut i32) (i32.const 0))
+ (global $~lib/rt/itcms/pinSpace (mut i32) (i32.const 0))
  (global $~lib/rt/itcms/fromSpace (mut i32) (i32.const 0))
  (global $~lib/rt/tlsf/ROOT (mut i32) (i32.const 0))
- (global $assembly/index/OptionalFloat64Value i32 (i32.const 3))
- (global $assembly/index/ChartPoint i32 (i32.const 4))
- (global $assembly/index/LastValues i32 (i32.const 5))
- (global $assembly/index/ReturnValue i32 (i32.const 6))
- (global $~lib/memory/__stack_pointer (mut i32) (i32.const 17884))
+ (global $assembly/index/ReturnValue i32 (i32.const 5))
+ (global $~lib/rt/__rtti_base i32 (i32.const 1792))
+ (global $~lib/memory/__stack_pointer (mut i32) (i32.const 18236))
  (memory $0 1)
  (data (i32.const 1036) "<")
- (data (i32.const 1048) "\01\00\00\00(\00\00\00A\00l\00l\00o\00c\00a\00t\00i\00o\00n\00 \00t\00o\00o\00 \00l\00a\00r\00g\00e")
- (data (i32.const 1100) "<")
- (data (i32.const 1112) "\01\00\00\00 \00\00\00~\00l\00i\00b\00/\00r\00t\00/\00i\00t\00c\00m\00s\00.\00t\00s")
- (data (i32.const 1228) "<")
- (data (i32.const 1240) "\01\00\00\00$\00\00\00I\00n\00d\00e\00x\00 \00o\00u\00t\00 \00o\00f\00 \00r\00a\00n\00g\00e")
- (data (i32.const 1292) ",")
- (data (i32.const 1304) "\01\00\00\00\14\00\00\00~\00l\00i\00b\00/\00r\00t\00.\00t\00s")
+ (data (i32.const 1048) "\01\00\00\00 \00\00\00~\00l\00i\00b\00/\00r\00t\00/\00i\00t\00c\00m\00s\00.\00t\00s")
+ (data (i32.const 1132) "<")
+ (data (i32.const 1144) "\01\00\00\00$\00\00\00I\00n\00d\00e\00x\00 \00o\00u\00t\00 \00o\00f\00 \00r\00a\00n\00g\00e")
+ (data (i32.const 1196) ",")
+ (data (i32.const 1208) "\01\00\00\00\14\00\00\00~\00l\00i\00b\00/\00r\00t\00.\00t\00s")
+ (data (i32.const 1244) "<")
+ (data (i32.const 1256) "\01\00\00\00(\00\00\00A\00l\00l\00o\00c\00a\00t\00i\00o\00n\00 \00t\00o\00o\00 \00l\00a\00r\00g\00e")
  (data (i32.const 1372) "<")
  (data (i32.const 1384) "\01\00\00\00\1e\00\00\00~\00l\00i\00b\00/\00r\00t\00/\00t\00l\00s\00f\00.\00t\00s")
- (data (i32.const 1440) "\07\00\00\00 \00\00\00\00\00\00\00 ")
- (data (i32.const 1468) " ")
- (export "OptionalFloat64Value" (global $assembly/index/OptionalFloat64Value))
- (export "ChartPoint" (global $assembly/index/ChartPoint))
- (export "LastValues" (global $assembly/index/LastValues))
+ (data (i32.const 1436) ",")
+ (data (i32.const 1448) "\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00l\00e\00n\00g\00t\00h")
+ (data (i32.const 1484) "<")
+ (data (i32.const 1496) "\01\00\00\00&\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s")
+ (data (i32.const 1548) "<")
+ (data (i32.const 1560) "\01\00\00\00$\00\00\00~\00l\00i\00b\00/\00t\00y\00p\00e\00d\00a\00r\00r\00a\00y\00.\00t\00s")
+ (data (i32.const 1612) ",")
+ (data (i32.const 1624) "\01\00\00\00\1a\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00.\00t\00s")
+ (data (i32.const 1660) "<")
+ (data (i32.const 1672) "\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d")
+ (data (i32.const 1724) "<")
+ (data (i32.const 1736) "\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d")
+ (data (i32.const 1792) "\07\00\00\00 \00\00\00\00\00\00\00 ")
+ (data (i32.const 1820) "\01\1a\00\00\02\00\00\00B")
+ (export "Float64Array_ID" (global $assembly/index/Float64Array_ID))
+ (export "BoolArray_ID" (global $assembly/index/BoolArray_ID))
  (export "ReturnValue" (global $assembly/index/ReturnValue))
+ (export "__new" (func $~lib/rt/itcms/__new))
+ (export "__pin" (func $~lib/rt/itcms/__pin))
+ (export "__unpin" (func $~lib/rt/itcms/__unpin))
+ (export "__collect" (func $~lib/rt/itcms/__collect))
+ (export "__rtti_base" (global $~lib/rt/__rtti_base))
  (export "memory" (memory $0))
- (export "OptionalFloat64Value#get:value" (func $export:assembly/index/OptionalFloat64Value#get:value))
- (export "OptionalFloat64Value#set:value" (func $export:assembly/index/OptionalFloat64Value#set:value))
- (export "OptionalFloat64Value#get:isEmpty" (func $export:assembly/index/OptionalFloat64Value#get:isEmpty))
- (export "OptionalFloat64Value#set:isEmpty" (func $export:assembly/index/OptionalFloat64Value#set:isEmpty))
- (export "OptionalFloat64Value#constructor" (func $export:assembly/index/OptionalFloat64Value#constructor))
- (export "ChartPoint#get:index" (func $export:assembly/index/OptionalFloat64Value#get:value))
- (export "ChartPoint#set:index" (func $export:assembly/index/OptionalFloat64Value#set:value))
- (export "ChartPoint#get:millis" (func $export:assembly/index/ChartPoint#get:millis))
- (export "ChartPoint#set:millis" (func $export:assembly/index/ChartPoint#set:millis))
- (export "ChartPoint#get:balance" (func $export:assembly/index/ChartPoint#get:balance))
- (export "ChartPoint#set:balance" (func $export:assembly/index/ChartPoint#set:balance))
- (export "ChartPoint#get:equity" (func $export:assembly/index/ChartPoint#get:equity))
- (export "ChartPoint#set:equity" (func $export:assembly/index/ChartPoint#set:equity))
- (export "ChartPoint#get:isLoop" (func $export:assembly/index/ChartPoint#get:isLoop))
- (export "ChartPoint#set:isLoop" (func $export:assembly/index/ChartPoint#set:isLoop))
- (export "ChartPoint#constructor" (func $export:assembly/index/ChartPoint#constructor))
- (export "LastValues#get:balance" (func $export:assembly/index/LastValues#get:balance))
- (export "LastValues#set:balance" (func $export:assembly/index/LastValues#set:balance))
- (export "LastValues#get:equity" (func $export:assembly/index/LastValues#get:equity))
- (export "LastValues#set:equity" (func $export:assembly/index/LastValues#set:equity))
- (export "LastValues#constructor" (func $export:assembly/index/LastValues#constructor))
- (export "ReturnValue#get:value" (func $export:assembly/index/LastValues#get:balance))
- (export "ReturnValue#set:value" (func $export:assembly/index/LastValues#set:balance))
- (export "ReturnValue#get:loopValue" (func $export:assembly/index/LastValues#get:equity))
- (export "ReturnValue#set:loopValue" (func $export:assembly/index/LastValues#set:equity))
- (export "ReturnValue#get:unalteredGapValue" (func $export:assembly/index/ReturnValue#get:unalteredGapValue))
- (export "ReturnValue#set:unalteredGapValue" (func $export:assembly/index/ReturnValue#set:unalteredGapValue))
- (export "ReturnValue#get:lastValue" (func $export:assembly/index/ReturnValue#get:lastValue))
- (export "ReturnValue#set:lastValue" (func $export:assembly/index/ReturnValue#set:lastValue))
+ (export "ReturnValue#get:balance" (func $export:assembly/index/ReturnValue#get:balance))
+ (export "ReturnValue#set:balance" (func $export:assembly/index/ReturnValue#set:balance))
+ (export "ReturnValue#get:balanceLoop" (func $export:assembly/index/ReturnValue#get:balanceLoop))
+ (export "ReturnValue#set:balanceLoop" (func $export:assembly/index/ReturnValue#set:balanceLoop))
+ (export "ReturnValue#get:balanceUnalteredGap" (func $export:assembly/index/ReturnValue#get:balanceUnalteredGap))
+ (export "ReturnValue#set:balanceUnalteredGap" (func $export:assembly/index/ReturnValue#set:balanceUnalteredGap))
+ (export "ReturnValue#get:equity" (func $export:assembly/index/ReturnValue#get:equity))
+ (export "ReturnValue#set:equity" (func $export:assembly/index/ReturnValue#set:equity))
+ (export "ReturnValue#get:equityLoop" (func $export:assembly/index/ReturnValue#get:equityLoop))
+ (export "ReturnValue#set:equityLoop" (func $export:assembly/index/ReturnValue#set:equityLoop))
+ (export "ReturnValue#get:equityUnalteredGap" (func $export:assembly/index/ReturnValue#get:equityUnalteredGap))
+ (export "ReturnValue#set:equityUnalteredGap" (func $export:assembly/index/ReturnValue#set:equityUnalteredGap))
  (export "ReturnValue#constructor" (func $export:assembly/index/ReturnValue#constructor))
- (export "getValues" (func $export:assembly/index/getValues))
+ (export "findLoops" (func $export:assembly/index/findLoops))
  (start $~start)
- (func $~lib/rt/itcms/initLazy (param $0 i32) (result i32)
-  local.get $0
-  local.get $0
-  i32.store offset=4
-  local.get $0
-  local.get $0
-  i32.store offset=8
-  local.get $0
- )
- (func $~lib/rt/itcms/visitRoots
-  (local $0 i32)
-  (local $1 i32)
-  i32.const 1248
-  call $~lib/rt/itcms/__visit
-  i32.const 1056
-  call $~lib/rt/itcms/__visit
-  global.get $~lib/rt/itcms/pinSpace
-  local.tee $1
-  i32.load offset=4
-  i32.const -4
-  i32.and
-  local.set $0
-  loop $while-continue|0
-   local.get $0
-   local.get $1
-   i32.ne
-   if
-    local.get $0
-    i32.load offset=4
-    i32.const 3
-    i32.and
-    i32.const 3
-    i32.ne
-    if
-     i32.const 0
-     i32.const 1120
-     i32.const 159
-     i32.const 16
-     call $~lib/builtins/abort
-     unreachable
-    end
-    local.get $0
-    i32.const 20
-    i32.add
-    call $~lib/rt/__visit_members
-    local.get $0
-    i32.load offset=4
-    i32.const -4
-    i32.and
-    local.set $0
-    br $while-continue|0
-   end
-  end
- )
- (func $~lib/rt/itcms/Object#set:color (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  local.get $0
-  i32.load offset=4
-  i32.const -4
-  i32.and
-  i32.or
-  i32.store offset=4
- )
  (func $~lib/rt/itcms/Object#set:next (param $0 i32) (param $1 i32)
   local.get $0
   local.get $1
@@ -152,6 +86,61 @@
   i32.and
   i32.or
   i32.store offset=4
+ )
+ (func $~lib/rt/itcms/Object#unlink (param $0 i32)
+  (local $1 i32)
+  local.get $0
+  i32.load offset=4
+  i32.const -4
+  i32.and
+  local.tee $1
+  i32.eqz
+  if
+   i32.const 0
+   local.get $0
+   i32.const 18236
+   i32.lt_u
+   local.get $0
+   i32.load offset=8
+   select
+   i32.eqz
+   if
+    i32.const 0
+    i32.const 1056
+    i32.const 127
+    i32.const 18
+    call $~lib/builtins/abort
+    unreachable
+   end
+   return
+  end
+  local.get $0
+  i32.load offset=8
+  local.tee $0
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1056
+   i32.const 131
+   i32.const 16
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $1
+  local.get $0
+  i32.store offset=8
+  local.get $0
+  local.get $1
+  call $~lib/rt/itcms/Object#set:next
+ )
+ (func $~lib/rt/itcms/initLazy (param $0 i32) (result i32)
+  local.get $0
+  local.get $0
+  i32.store offset=4
+  local.get $0
+  local.get $0
+  i32.store offset=8
+  local.get $0
  )
  (func $~lib/rt/itcms/Object#linkTo (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
@@ -186,7 +175,7 @@
    i32.eqz
    if
     i32.const 0
-    i32.const 1120
+    i32.const 1056
     i32.const 147
     i32.const 30
     call $~lib/builtins/abort
@@ -195,77 +184,35 @@
    local.get $1
    global.set $~lib/rt/itcms/iter
   end
-  block $__inlined_func$~lib/rt/itcms/Object#unlink
-   local.get $0
-   i32.load offset=4
-   i32.const -4
-   i32.and
-   local.tee $1
-   i32.eqz
-   if
-    i32.const 0
-    local.get $0
-    i32.const 17884
-    i32.lt_u
-    local.get $0
-    i32.load offset=8
-    select
-    i32.eqz
-    if
-     i32.const 0
-     i32.const 1120
-     i32.const 127
-     i32.const 18
-     call $~lib/builtins/abort
-     unreachable
-    end
-    br $__inlined_func$~lib/rt/itcms/Object#unlink
-   end
-   local.get $0
-   i32.load offset=8
-   local.tee $2
-   i32.eqz
-   if
-    i32.const 0
-    i32.const 1120
-    i32.const 131
-    i32.const 16
-    call $~lib/builtins/abort
-    unreachable
-   end
-   local.get $1
-   local.get $2
-   i32.store offset=8
-   local.get $2
-   local.get $1
-   call $~lib/rt/itcms/Object#set:next
-  end
   local.get $0
+  call $~lib/rt/itcms/Object#unlink
   global.get $~lib/rt/itcms/toSpace
+  local.set $2
   local.get $0
-  i32.load offset=12
   local.tee $1
+  i32.load offset=12
+  local.tee $0
   i32.const 1
   i32.le_u
   if (result i32)
    i32.const 1
   else
-   local.get $1
-   i32.const 1440
+   local.get $0
+   i32.const 1792
    i32.load
    i32.gt_u
    if
-    i32.const 1248
-    i32.const 1312
+    i32.const 1152
+    i32.const 1216
     i32.const 22
     i32.const 28
     call $~lib/builtins/abort
     unreachable
    end
-   local.get $1
+   local.get $0
    i32.const 3
    i32.shl
-   i32.const 1444
+   i32.const 1796
    i32.add
    i32.load
    i32.const 32
@@ -277,7 +224,178 @@
   else
    i32.const 2
   end
+  local.set $0
+  local.get $1
+  local.get $2
+  local.get $0
   call $~lib/rt/itcms/Object#linkTo
+ )
+ (func $~lib/rt/itcms/__link (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  local.get $1
+  i32.eqz
+  if
+   return
+  end
+  local.get $0
+  i32.eqz
+  if
+   i32.const 0
+   i32.const 1056
+   i32.const 294
+   i32.const 14
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $~lib/rt/itcms/white
+  local.get $1
+  i32.const 20
+  i32.sub
+  local.tee $1
+  i32.load offset=4
+  i32.const 3
+  i32.and
+  i32.eq
+  if
+   local.get $0
+   i32.const 20
+   i32.sub
+   i32.load offset=4
+   i32.const 3
+   i32.and
+   local.tee $0
+   local.set $2
+   local.get $0
+   global.get $~lib/rt/itcms/white
+   i32.eqz
+   i32.eq
+   if
+    local.get $1
+    call $~lib/rt/itcms/Object#makeGray
+   else
+    global.get $~lib/rt/itcms/state
+    i32.const 1
+    i32.eq
+    i32.const 0
+    local.get $2
+    i32.const 3
+    i32.eq
+    select
+    if
+     local.get $1
+     call $~lib/rt/itcms/Object#makeGray
+    end
+   end
+  end
+ )
+ (func $assembly/index/ReturnValue#set:balance (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store
+  local.get $0
+  local.get $1
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/index/ReturnValue#set:balanceLoop (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/index/ReturnValue#set:balanceUnalteredGap (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=8
+  local.get $0
+  local.get $1
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/index/ReturnValue#set:equity (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=12
+  local.get $0
+  local.get $1
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/index/ReturnValue#set:equityLoop (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=16
+  local.get $0
+  local.get $1
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/index/ReturnValue#set:equityUnalteredGap (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=20
+  local.get $0
+  local.get $1
+  call $~lib/rt/itcms/__link
+ )
+ (func $~lib/rt/itcms/visitRoots
+  (local $0 i32)
+  (local $1 i32)
+  i32.const 1152
+  call $~lib/rt/itcms/__visit
+  i32.const 1456
+  call $~lib/rt/itcms/__visit
+  i32.const 1264
+  call $~lib/rt/itcms/__visit
+  i32.const 1680
+  call $~lib/rt/itcms/__visit
+  i32.const 1744
+  call $~lib/rt/itcms/__visit
+  global.get $~lib/rt/itcms/pinSpace
+  local.tee $1
+  i32.load offset=4
+  i32.const -4
+  i32.and
+  local.set $0
+  loop $while-continue|0
+   local.get $0
+   local.get $1
+   i32.ne
+   if
+    local.get $0
+    i32.load offset=4
+    i32.const 3
+    i32.and
+    i32.const 3
+    i32.ne
+    if
+     i32.const 0
+     i32.const 1056
+     i32.const 159
+     i32.const 16
+     call $~lib/builtins/abort
+     unreachable
+    end
+    local.get $0
+    i32.const 20
+    i32.add
+    call $~lib/rt/__visit_members
+    local.get $0
+    i32.load offset=4
+    i32.const -4
+    i32.and
+    local.set $0
+    br $while-continue|0
+   end
+  end
+ )
+ (func $~lib/rt/itcms/Object#set:color (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  local.get $0
+  i32.load offset=4
+  i32.const -4
+  i32.and
+  i32.or
+  i32.store offset=4
  )
  (func $~lib/rt/itcms/__visit (param $0 i32)
   local.get $0
@@ -839,10 +957,10 @@
   if
    unreachable
   end
-  i32.const 17888
+  i32.const 18240
   i32.const 0
   i32.store
-  i32.const 19456
+  i32.const 19808
   i32.const 0
   i32.store
   loop $for-loop|0
@@ -853,7 +971,7 @@
     local.get $1
     i32.const 2
     i32.shl
-    i32.const 17888
+    i32.const 18240
     i32.add
     i32.const 0
     i32.store offset=4
@@ -871,7 +989,7 @@
       i32.add
       i32.const 2
       i32.shl
-      i32.const 17888
+      i32.const 18240
       i32.add
       i32.const 0
       i32.store offset=96
@@ -889,13 +1007,13 @@
     br $for-loop|0
    end
   end
-  i32.const 17888
-  i32.const 19460
+  i32.const 18240
+  i32.const 19812
   memory.size
   i32.const 16
   i32.shl
   call $~lib/rt/tlsf/addMemory
-  i32.const 17888
+  i32.const 18240
   global.set $~lib/rt/tlsf/ROOT
  )
  (func $~lib/rt/itcms/step (result i32)
@@ -974,7 +1092,7 @@
       local.set $0
       loop $while-continue|0
        local.get $0
-       i32.const 17884
+       i32.const 18236
        i32.lt_u
        if
         local.get $0
@@ -1057,14 +1175,14 @@
      i32.ne
      if
       i32.const 0
-      i32.const 1120
+      i32.const 1056
       i32.const 228
       i32.const 20
       call $~lib/builtins/abort
       unreachable
      end
      local.get $0
-     i32.const 17884
+     i32.const 18236
      i32.lt_u
      if
       local.get $0
@@ -1087,7 +1205,7 @@
       i32.const 4
       i32.add
       local.tee $1
-      i32.const 17884
+      i32.const 18236
       i32.ge_u
       if
        global.get $~lib/rt/tlsf/ROOT
@@ -1286,7 +1404,7 @@
   i32.const 1073741820
   i32.gt_u
   if
-   i32.const 1056
+   i32.const 1264
    i32.const 1392
    i32.const 458
    i32.const 29
@@ -1659,8 +1777,8 @@
   i32.const 1073741804
   i32.ge_u
   if
+   i32.const 1264
    i32.const 1056
-   i32.const 1120
    i32.const 260
    i32.const 31
    call $~lib/builtins/abort
@@ -1749,142 +1867,226 @@
   call $~lib/memory/memory.fill
   local.get $1
  )
- (func $~lib/rt/itcms/__link (param $0 i32) (param $1 i32)
-  (local $2 i32)
+ (func $~lib/typedarray/Float64Array#__get (param $0 i32) (param $1 i32) (result f64)
   local.get $1
+  local.get $0
+  i32.load offset=8
+  i32.const 3
+  i32.shr_u
+  i32.ge_u
+  if
+   i32.const 1152
+   i32.const 1568
+   i32.const 1374
+   i32.const 64
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $0
+  i32.load offset=4
+  local.get $1
+  i32.const 3
+  i32.shl
+  i32.add
+  f64.load
+ )
+ (func $~lib/array/Array<bool>#__get (param $0 i32) (param $1 i32) (result i32)
+  local.get $1
+  local.get $0
+  i32.load offset=12
+  i32.ge_u
+  if
+   i32.const 1152
+   i32.const 1632
+   i32.const 99
+   i32.const 42
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $0
+  i32.load offset=4
+  local.get $1
+  i32.add
+  i32.load8_u
+ )
+ (func $~lib/typedarray/Float64Array#__set (param $0 i32) (param $1 i32) (param $2 f64)
+  local.get $1
+  local.get $0
+  i32.load offset=8
+  i32.const 3
+  i32.shr_u
+  i32.ge_u
+  if
+   i32.const 1152
+   i32.const 1568
+   i32.const 1385
+   i32.const 64
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $0
+  i32.load offset=4
+  local.get $1
+  i32.const 3
+  i32.shl
+  i32.add
+  local.get $2
+  f64.store
+ )
+ (func $~lib/rt/itcms/__pin (param $0 i32) (result i32)
+  (local $1 i32)
+  local.get $0
+  if
+   local.get $0
+   i32.const 20
+   i32.sub
+   local.tee $1
+   i32.load offset=4
+   i32.const 3
+   i32.and
+   i32.const 3
+   i32.eq
+   if
+    i32.const 1680
+    i32.const 1056
+    i32.const 337
+    i32.const 7
+    call $~lib/builtins/abort
+    unreachable
+   end
+   local.get $1
+   call $~lib/rt/itcms/Object#unlink
+   local.get $1
+   global.get $~lib/rt/itcms/pinSpace
+   i32.const 3
+   call $~lib/rt/itcms/Object#linkTo
+  end
+  local.get $0
+ )
+ (func $~lib/rt/itcms/__unpin (param $0 i32)
+  local.get $0
   i32.eqz
   if
    return
   end
   local.get $0
-  i32.eqz
-  if
-   i32.const 0
-   i32.const 1120
-   i32.const 294
-   i32.const 14
-   call $~lib/builtins/abort
-   unreachable
-  end
-  global.get $~lib/rt/itcms/white
-  local.get $1
   i32.const 20
   i32.sub
-  local.tee $1
+  local.tee $0
   i32.load offset=4
   i32.const 3
   i32.and
+  i32.const 3
+  i32.ne
+  if
+   i32.const 1744
+   i32.const 1056
+   i32.const 351
+   i32.const 5
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $~lib/rt/itcms/state
+  i32.const 1
   i32.eq
   if
    local.get $0
-   i32.const 20
-   i32.sub
-   i32.load offset=4
-   i32.const 3
-   i32.and
-   local.tee $0
-   local.set $2
+   call $~lib/rt/itcms/Object#makeGray
+  else
    local.get $0
+   call $~lib/rt/itcms/Object#unlink
+   local.get $0
+   global.get $~lib/rt/itcms/fromSpace
    global.get $~lib/rt/itcms/white
-   i32.eqz
-   i32.eq
-   if
-    local.get $1
-    call $~lib/rt/itcms/Object#makeGray
-   else
+   call $~lib/rt/itcms/Object#linkTo
+  end
+ )
+ (func $~lib/rt/itcms/__collect
+  global.get $~lib/rt/itcms/state
+  i32.const 0
+  i32.gt_s
+  if
+   loop $while-continue|0
     global.get $~lib/rt/itcms/state
-    i32.const 1
-    i32.eq
-    i32.const 0
-    local.get $2
-    i32.const 3
-    i32.eq
-    select
     if
-     local.get $1
-     call $~lib/rt/itcms/Object#makeGray
+     call $~lib/rt/itcms/step
+     drop
+     br $while-continue|0
     end
    end
   end
- )
- (func $assembly/index/ChartPoint#set:balance (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store offset=16
-  local.get $0
-  local.get $1
-  call $~lib/rt/itcms/__link
- )
- (func $assembly/index/ChartPoint#set:equity (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store offset=20
-  local.get $0
-  local.get $1
-  call $~lib/rt/itcms/__link
- )
- (func $assembly/index/LastValues#set:balance (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store
-  local.get $0
-  local.get $1
-  call $~lib/rt/itcms/__link
- )
- (func $assembly/index/LastValues#set:equity (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store offset=4
-  local.get $0
-  local.get $1
-  call $~lib/rt/itcms/__link
- )
- (func $assembly/index/ReturnValue#set:unalteredGapValue (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store offset=8
-  local.get $0
-  local.get $1
-  call $~lib/rt/itcms/__link
- )
- (func $assembly/index/ReturnValue#set:lastValue (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store offset=12
-  local.get $0
-  local.get $1
-  call $~lib/rt/itcms/__link
+  call $~lib/rt/itcms/step
+  drop
+  loop $while-continue|1
+   global.get $~lib/rt/itcms/state
+   if
+    call $~lib/rt/itcms/step
+    drop
+    br $while-continue|1
+   end
+  end
+  global.get $~lib/rt/itcms/total
+  i64.extend_i32_u
+  i64.const 200
+  i64.mul
+  i64.const 100
+  i64.div_u
+  i32.wrap_i64
+  i32.const 1024
+  i32.add
+  global.set $~lib/rt/itcms/threshold
  )
  (func $~lib/rt/__visit_members (param $0 i32)
   (local $1 i32)
-  block $invalid
-   block $assembly/index/ReturnValue
-    block $assembly/index/LastValues
-     block $assembly/index/ChartPoint
-      block $assembly/index/OptionalFloat64Value
-       block $~lib/arraybuffer/ArrayBufferView
-        block $~lib/string/String
-         block $~lib/arraybuffer/ArrayBuffer
-          local.get $0
-          i32.const 8
-          i32.sub
-          i32.load
-          br_table $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $assembly/index/OptionalFloat64Value $assembly/index/ChartPoint $assembly/index/LastValues $assembly/index/ReturnValue $invalid
-         end
-         return
+  block $folding-inner0
+   block $invalid
+    block $assembly/index/CalculatedValues
+     block $assembly/index/ReturnValue
+      block $~lib/array/Array<bool>
+       block $~lib/string/String
+        block $~lib/arraybuffer/ArrayBuffer
+         local.get $0
+         i32.const 8
+         i32.sub
+         i32.load
+         br_table $~lib/arraybuffer/ArrayBuffer $~lib/string/String $folding-inner0 $folding-inner0 $~lib/array/Array<bool> $assembly/index/ReturnValue $assembly/index/CalculatedValues $invalid
         end
         return
        end
-       local.get $0
-       i32.load
-       local.tee $0
-       if
-        local.get $0
-        call $~lib/rt/itcms/__visit
-       end
        return
       end
+      local.get $0
+      i32.load
+      call $~lib/rt/itcms/__visit
       return
+     end
+     local.get $0
+     i32.load
+     local.tee $1
+     if
+      local.get $1
+      call $~lib/rt/itcms/__visit
+     end
+     local.get $0
+     i32.load offset=4
+     local.tee $1
+     if
+      local.get $1
+      call $~lib/rt/itcms/__visit
+     end
+     local.get $0
+     i32.load offset=8
+     local.tee $1
+     if
+      local.get $1
+      call $~lib/rt/itcms/__visit
+     end
+     local.get $0
+     i32.load offset=12
+     local.tee $1
+     if
+      local.get $1
+      call $~lib/rt/itcms/__visit
      end
      local.get $0
      i32.load offset=16
@@ -1911,6 +2113,13 @@
     end
     local.get $0
     i32.load offset=4
+    local.tee $1
+    if
+     local.get $1
+     call $~lib/rt/itcms/__visit
+    end
+    local.get $0
+    i32.load offset=8
     local.tee $0
     if
      local.get $0
@@ -1918,78 +2127,214 @@
     end
     return
    end
-   local.get $0
-   i32.load
-   local.tee $1
-   if
-    local.get $1
-    call $~lib/rt/itcms/__visit
-   end
-   local.get $0
-   i32.load offset=4
-   local.tee $1
-   if
-    local.get $1
-    call $~lib/rt/itcms/__visit
-   end
-   local.get $0
-   i32.load offset=8
-   local.tee $1
-   if
-    local.get $1
-    call $~lib/rt/itcms/__visit
-   end
-   local.get $0
-   i32.load offset=12
-   local.tee $0
-   if
-    local.get $0
-    call $~lib/rt/itcms/__visit
-   end
-   return
+   unreachable
   end
-  unreachable
+  local.get $0
+  i32.load
+  local.tee $0
+  if
+   local.get $0
+   call $~lib/rt/itcms/__visit
+  end
  )
  (func $~start
+  i32.const 1104
+  call $~lib/rt/itcms/initLazy
+  global.set $~lib/rt/itcms/toSpace
   memory.size
   i32.const 16
   i32.shl
-  i32.const 17884
+  i32.const 18236
   i32.sub
   i32.const 1
   i32.shr_u
   global.set $~lib/rt/itcms/threshold
-  i32.const 1168
+  i32.const 1312
   call $~lib/rt/itcms/initLazy
   global.set $~lib/rt/itcms/pinSpace
-  i32.const 1200
-  call $~lib/rt/itcms/initLazy
-  global.set $~lib/rt/itcms/toSpace
   i32.const 1344
   call $~lib/rt/itcms/initLazy
   global.set $~lib/rt/itcms/fromSpace
  )
  (func $~stack_check
   global.get $~lib/memory/__stack_pointer
-  i32.const 1500
+  i32.const 1852
   i32.lt_s
   if
-   i32.const 17904
-   i32.const 17952
+   i32.const 18256
+   i32.const 18304
    i32.const 1
    i32.const 1
    call $~lib/builtins/abort
    unreachable
   end
  )
- (func $assembly/index/getValues (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
-  (local $5 i32)
-  (local $6 i32)
-  (local $7 i32)
-  (local $8 i32)
-  (local $9 i32)
+ (func $assembly/index/ReturnValue#constructor (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i32) (param $6 i32) (result i32)
   global.get $~lib/memory/__stack_pointer
-  i32.const 24
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  local.get $0
+  i32.eqz
+  if
+   global.get $~lib/memory/__stack_pointer
+   i32.const 24
+   i32.const 5
+   call $~lib/rt/itcms/__new
+   local.tee $0
+   i32.store
+  end
+  local.get $0
+  i32.const 0
+  call $assembly/index/ReturnValue#set:balance
+  local.get $0
+  i32.const 0
+  call $assembly/index/ReturnValue#set:balanceLoop
+  local.get $0
+  i32.const 0
+  call $assembly/index/ReturnValue#set:balanceUnalteredGap
+  local.get $0
+  i32.const 0
+  call $assembly/index/ReturnValue#set:equity
+  local.get $0
+  i32.const 0
+  call $assembly/index/ReturnValue#set:equityLoop
+  local.get $0
+  i32.const 0
+  call $assembly/index/ReturnValue#set:equityUnalteredGap
+  local.get $0
+  local.get $1
+  call $assembly/index/ReturnValue#set:balance
+  local.get $0
+  local.get $2
+  call $assembly/index/ReturnValue#set:balanceLoop
+  local.get $0
+  local.get $3
+  call $assembly/index/ReturnValue#set:balanceUnalteredGap
+  local.get $0
+  local.get $4
+  call $assembly/index/ReturnValue#set:equity
+  local.get $0
+  local.get $5
+  call $assembly/index/ReturnValue#set:equityLoop
+  local.get $0
+  local.get $6
+  call $assembly/index/ReturnValue#set:equityUnalteredGap
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $0
+ )
+ (func $~lib/typedarray/Float64Array#constructor (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  i32.const 12
+  i32.const 3
+  call $~lib/rt/itcms/__new
+  local.tee $1
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store
+  local.get $1
+  i32.eqz
+  if
+   global.get $~lib/memory/__stack_pointer
+   i32.const 12
+   i32.const 2
+   call $~lib/rt/itcms/__new
+   local.tee $1
+   i32.store
+  end
+  local.get $1
+  i32.const 0
+  call $assembly/index/ReturnValue#set:balance
+  local.get $1
+  i32.const 0
+  i32.store offset=4
+  local.get $1
+  i32.const 0
+  i32.store offset=8
+  local.get $0
+  i32.const 134217727
+  i32.gt_u
+  if
+   i32.const 1456
+   i32.const 1504
+   i32.const 18
+   i32.const 57
+   call $~lib/builtins/abort
+   unreachable
+  end
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.const 3
+  i32.shl
+  local.tee $0
+  i32.const 0
+  call $~lib/rt/itcms/__new
+  local.tee $2
+  i32.store offset=4
+  local.get $2
+  local.get $0
+  call $~lib/memory/memory.fill
+  local.get $1
+  local.get $2
+  call $assembly/index/ReturnValue#set:balance
+  local.get $1
+  local.get $2
+  i32.store offset=4
+  local.get $1
+  local.get $0
+  i32.store offset=8
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $assembly/index/getValues (param $0 i32) (param $1 i32) (result i32)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 i32)
+  (local $5 i32)
+  (local $6 f64)
+  (local $7 f64)
+  (local $8 f64)
+  (local $9 i32)
+  (local $10 i32)
+  (local $11 i32)
+  (local $12 i32)
+  (local $13 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 12
   i32.sub
   global.set $~lib/memory/__stack_pointer
   call $~stack_check
@@ -1997,528 +2342,217 @@
   i64.const 0
   i64.store
   global.get $~lib/memory/__stack_pointer
-  i64.const 0
-  i64.store offset=8
-  global.get $~lib/memory/__stack_pointer
-  i64.const 0
-  i64.store offset=16
-  local.get $2
-  if (result i32)
-   local.get $2
-   i32.load8_u offset=24
-  else
-   i32.const 0
-  end
-  local.set $9
-  local.get $3
-  if (result i32)
-   local.get $3
-   i32.load8_u offset=24
-  else
-   i32.const 0
-  end
-  local.set $8
+  i32.const 0
+  i32.store offset=8
   global.get $~lib/memory/__stack_pointer
   local.get $0
-  if (result i32)
-   local.get $1
-   i32.load offset=16
-  else
-   local.get $1
-   i32.load offset=20
-  end
-  local.tee $2
+  i32.load offset=8
+  i32.const 3
+  i32.shr_u
+  call $~lib/typedarray/Float64Array#constructor
+  local.tee $9
   i32.store
   global.get $~lib/memory/__stack_pointer
   local.get $0
-  if (result i32)
-   local.get $4
-   i32.load
-  else
-   local.get $4
-   i32.load offset=4
-  end
-  local.tee $6
+  i32.load offset=8
+  i32.const 3
+  i32.shr_u
+  call $~lib/typedarray/Float64Array#constructor
+  local.tee $10
   i32.store offset=4
   global.get $~lib/memory/__stack_pointer
-  i32.const 0
-  f64.const 0
-  i32.const 1
-  call $assembly/index/OptionalFloat64Value#constructor
-  local.tee $4
+  local.get $0
+  i32.load offset=8
+  i32.const 3
+  i32.shr_u
+  call $~lib/typedarray/Float64Array#constructor
+  local.tee $11
   i32.store offset=8
-  global.get $~lib/memory/__stack_pointer
-  i32.const 0
-  f64.const 0
-  i32.const 1
-  call $assembly/index/OptionalFloat64Value#constructor
-  local.tee $7
-  i32.store offset=12
-  global.get $~lib/memory/__stack_pointer
-  i32.const 0
-  f64.const 0
-  i32.const 1
-  call $assembly/index/OptionalFloat64Value#constructor
-  local.tee $5
-  i32.store offset=16
-  local.get $3
-  if (result i32)
-   local.get $0
-   if (result i32)
-    local.get $3
-    i32.load offset=16
-   else
-    local.get $3
-    i32.load offset=20
-   end
-   i32.load8_u offset=8
-  else
-   i32.const 1
-  end
-  local.set $0
-  local.get $1
-  i32.load8_u offset=24
-  if (result i32)
-   local.get $2
-   local.set $7
-   local.get $5
-   local.get $2
-   local.get $8
-   i32.const 1
-   local.get $0
-   i32.const 0
-   local.get $3
-   select
-   select
-   select
-   local.set $5
+  loop $for-loop|0
    local.get $4
-   local.get $2
-   local.get $8
-   i32.const 0
-   local.get $9
-   select
-   select
-  else
-   local.get $2
-   i32.load8_u offset=8
-   if (result i32)
+   local.get $0
+   i32.load offset=8
+   i32.const 3
+   i32.shr_u
+   i32.lt_s
+   if
+    local.get $4
+    i32.const 1
+    i32.sub
+    local.tee $5
+    f64.convert_i32_s
+    f64.const nan:0x8000000000000
+    local.get $5
+    i32.const 0
+    i32.ge_s
+    select
+    local.set $3
+    local.get $0
+    local.get $4
+    call $~lib/typedarray/Float64Array#__get
+    local.set $2
+    local.get $4
+    i32.const 1
+    i32.add
+    local.tee $5
+    f64.convert_i32_s
+    f64.const nan:0x8000000000000
+    local.get $5
+    local.get $0
+    i32.load offset=8
+    i32.const 3
+    i32.shr_u
+    i32.lt_s
+    select
+    local.tee $6
+    local.get $6
+    f64.eq
+    if (result f64)
+     local.get $0
+     local.get $6
+     i32.trunc_f64_s
+     call $~lib/typedarray/Float64Array#__get
+    else
+     f64.const nan:0x8000000000000
+    end
+    local.set $7
+    local.get $1
+    local.get $4
+    call $~lib/array/Array<bool>#__get
+    local.get $3
+    local.get $3
+    f64.eq
+    if (result i32)
+     local.get $1
+     local.get $3
+     i32.trunc_f64_s
+     call $~lib/array/Array<bool>#__get
+    else
+     i32.const 0
+    end
+    local.set $13
+    local.get $6
+    local.get $6
+    f64.eq
+    if (result i32)
+     local.get $1
+     local.get $6
+     i32.trunc_f64_s
+     call $~lib/array/Array<bool>#__get
+    else
+     i32.const 0
+    end
+    local.set $5
+    f64.const nan:0x8000000000000
+    local.set $3
+    if (result f64)
+     local.get $2
+     local.set $3
+     f64.const nan:0x8000000000000
+     local.get $2
+     local.get $5
+     i32.const 1
+     local.get $7
+     local.get $7
+     f64.eq
+     select
+     select
+     local.set $8
+     f64.const nan:0x8000000000000
+     local.get $2
+     local.get $5
+     i32.const 0
+     local.get $13
+     select
+     select
+    else
+     local.get $2
+     local.get $2
+     f64.eq
+     if (result f64)
+      global.get $assembly/index/lastValue
+      local.set $8
+      global.get $assembly/index/lastValue
+      f64.const nan:0x8000000000000
+      local.get $7
+      local.get $7
+      f64.eq
+      select
+     else
+      f64.const nan:0x8000000000000
+      local.get $2
+      local.get $5
+      i32.const 1
+      local.get $7
+      local.get $7
+      f64.ne
+      select
+      select
+      local.set $8
+      local.get $2
+     end
+    end
+    local.set $6
+    local.get $2
+    local.get $2
+    f64.eq
+    if
+     local.get $2
+     global.set $assembly/index/lastValue
+    end
+    local.get $9
     local.get $4
     local.get $6
-    local.tee $5
-    local.get $0
-    i32.const 1
+    call $~lib/typedarray/Float64Array#__set
+    local.get $10
+    local.get $4
     local.get $3
-    select
-    select
-   else
-    local.get $5
-    local.get $2
+    call $~lib/typedarray/Float64Array#__set
+    local.get $11
+    local.get $4
     local.get $8
+    call $~lib/typedarray/Float64Array#__set
+    local.get $4
     i32.const 1
-    local.get $3
-    i32.const 0
-    local.get $0
-    select
-    select
-    select
-    local.set $5
-    local.get $2
+    i32.add
+    local.set $4
+    br $for-loop|0
    end
   end
-  local.set $4
+  f64.const nan:0x8000000000000
+  global.set $assembly/index/lastValue
   global.get $~lib/memory/__stack_pointer
-  local.get $6
-  local.get $2
-  local.get $2
-  i32.load8_u offset=8
-  select
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  i32.const 12
+  i32.const 6
+  call $~lib/rt/itcms/__new
   local.tee $0
-  i32.store offset=20
-  i32.const 0
-  local.get $4
-  local.get $7
-  local.get $5
-  local.get $0
-  call $assembly/index/ReturnValue#constructor
-  global.get $~lib/memory/__stack_pointer
-  i32.const 24
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $assembly/index/OptionalFloat64Value#constructor (param $0 i32) (param $1 f64) (param $2 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  i32.const 0
   i32.store
-  local.get $0
-  i32.eqz
-  if
-   global.get $~lib/memory/__stack_pointer
-   i32.const 9
-   i32.const 3
-   call $~lib/rt/itcms/__new
-   local.tee $0
-   i32.store
-  end
-  local.get $0
-  f64.const 0
-  f64.store
   local.get $0
   i32.const 0
-  i32.store8 offset=8
-  local.get $0
-  local.get $1
-  f64.store
-  local.get $0
-  local.get $2
-  i32.store8 offset=8
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
-  local.get $0
- )
- (func $assembly/index/ReturnValue#constructor (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  i32.const 0
-  i32.store
-  local.get $0
-  i32.eqz
-  if
-   global.get $~lib/memory/__stack_pointer
-   i32.const 16
-   i32.const 6
-   call $~lib/rt/itcms/__new
-   local.tee $0
-   i32.store
-  end
+  call $assembly/index/ReturnValue#set:balance
   local.get $0
   i32.const 0
-  call $assembly/index/LastValues#set:balance
+  call $assembly/index/ReturnValue#set:balanceLoop
   local.get $0
   i32.const 0
-  call $assembly/index/LastValues#set:equity
+  call $assembly/index/ReturnValue#set:balanceUnalteredGap
   local.get $0
-  i32.const 0
-  call $assembly/index/ReturnValue#set:unalteredGapValue
+  local.get $9
+  call $assembly/index/ReturnValue#set:balance
   local.get $0
-  i32.const 0
-  call $assembly/index/ReturnValue#set:lastValue
+  local.get $10
+  call $assembly/index/ReturnValue#set:balanceLoop
   local.get $0
-  local.get $1
-  call $assembly/index/LastValues#set:balance
-  local.get $0
-  local.get $2
-  call $assembly/index/LastValues#set:equity
-  local.get $0
-  local.get $3
-  call $assembly/index/ReturnValue#set:unalteredGapValue
-  local.get $0
-  local.get $4
-  call $assembly/index/ReturnValue#set:lastValue
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
-  local.get $0
- )
- (func $export:assembly/index/OptionalFloat64Value#get:value (param $0 i32) (result f64)
-  (local $1 f64)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  f64.load
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/OptionalFloat64Value#set:value (param $0 i32) (param $1 f64)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  local.get $1
-  f64.store
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/OptionalFloat64Value#get:isEmpty (param $0 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  i32.load8_u offset=8
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/OptionalFloat64Value#set:isEmpty (param $0 i32) (param $1 i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  local.get $1
-  i32.store8 offset=8
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/OptionalFloat64Value#constructor (param $0 i32) (param $1 f64) (param $2 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  local.get $1
-  local.get $2
-  call $assembly/index/OptionalFloat64Value#constructor
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#get:millis (param $0 i32) (result f64)
-  (local $1 f64)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  f64.load offset=8
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#set:millis (param $0 i32) (param $1 f64)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  local.get $1
-  f64.store offset=8
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#get:balance (param $0 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  i32.load offset=16
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#set:balance (param $0 i32) (param $1 i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 8
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  global.get $~lib/memory/__stack_pointer
-  local.get $1
-  i32.store offset=4
-  local.get $0
-  local.get $1
-  call $assembly/index/ChartPoint#set:balance
-  global.get $~lib/memory/__stack_pointer
-  i32.const 8
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#get:equity (param $0 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  i32.load offset=20
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#set:equity (param $0 i32) (param $1 i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 8
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  global.get $~lib/memory/__stack_pointer
-  local.get $1
-  i32.store offset=4
-  local.get $0
-  local.get $1
-  call $assembly/index/ChartPoint#set:equity
-  global.get $~lib/memory/__stack_pointer
-  i32.const 8
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#get:isLoop (param $0 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  i32.load8_u offset=24
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#set:isLoop (param $0 i32) (param $1 i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  local.get $1
-  i32.store8 offset=24
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
- (func $export:assembly/index/ChartPoint#constructor (param $0 i32) (param $1 f64) (param $2 f64) (param $3 i32) (param $4 i32) (param $5 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 12
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  global.get $~lib/memory/__stack_pointer
-  local.get $3
-  i32.store offset=4
-  global.get $~lib/memory/__stack_pointer
-  local.get $4
-  i32.store offset=8
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  i32.const 0
-  i32.store
-  local.get $0
-  i32.eqz
-  if
-   global.get $~lib/memory/__stack_pointer
-   i32.const 25
-   i32.const 4
-   call $~lib/rt/itcms/__new
-   local.tee $0
-   i32.store
-  end
-  local.get $0
-  f64.const 0
-  f64.store
-  local.get $0
-  f64.const 0
-  f64.store offset=8
-  local.get $0
-  i32.const 0
-  call $assembly/index/ChartPoint#set:balance
-  local.get $0
-  i32.const 0
-  call $assembly/index/ChartPoint#set:equity
-  local.get $0
-  i32.const 0
-  i32.store8 offset=24
-  local.get $0
-  local.get $1
-  f64.store
-  local.get $0
-  local.get $2
-  f64.store offset=8
-  local.get $0
-  local.get $3
-  call $assembly/index/ChartPoint#set:balance
-  local.get $0
-  local.get $4
-  call $assembly/index/ChartPoint#set:equity
-  local.get $0
-  local.get $5
-  i32.store8 offset=24
+  local.get $11
+  call $assembly/index/ReturnValue#set:balanceUnalteredGap
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.add
@@ -2529,7 +2563,7 @@
   global.set $~lib/memory/__stack_pointer
   local.get $0
  )
- (func $export:assembly/index/LastValues#get:balance (param $0 i32) (result i32)
+ (func $export:assembly/index/ReturnValue#get:balance (param $0 i32) (result i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
@@ -2545,7 +2579,7 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/LastValues#set:balance (param $0 i32) (param $1 i32)
+ (func $export:assembly/index/ReturnValue#set:balance (param $0 i32) (param $1 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.sub
@@ -2559,13 +2593,13 @@
   i32.store offset=4
   local.get $0
   local.get $1
-  call $assembly/index/LastValues#set:balance
+  call $assembly/index/ReturnValue#set:balance
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/LastValues#get:equity (param $0 i32) (result i32)
+ (func $export:assembly/index/ReturnValue#get:balanceLoop (param $0 i32) (result i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
@@ -2581,7 +2615,7 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/LastValues#set:equity (param $0 i32) (param $1 i32)
+ (func $export:assembly/index/ReturnValue#set:balanceLoop (param $0 i32) (param $1 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.sub
@@ -2595,68 +2629,13 @@
   i32.store offset=4
   local.get $0
   local.get $1
-  call $assembly/index/LastValues#set:equity
+  call $assembly/index/ReturnValue#set:balanceLoop
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/LastValues#constructor (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 12
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  global.get $~lib/memory/__stack_pointer
-  local.get $1
-  i32.store offset=4
-  global.get $~lib/memory/__stack_pointer
-  local.get $2
-  i32.store offset=8
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  i32.const 0
-  i32.store
-  local.get $0
-  i32.eqz
-  if
-   global.get $~lib/memory/__stack_pointer
-   i32.const 8
-   i32.const 5
-   call $~lib/rt/itcms/__new
-   local.tee $0
-   i32.store
-  end
-  local.get $0
-  i32.const 0
-  call $assembly/index/LastValues#set:balance
-  local.get $0
-  i32.const 0
-  call $assembly/index/LastValues#set:equity
-  local.get $0
-  local.get $1
-  call $assembly/index/LastValues#set:balance
-  local.get $0
-  local.get $2
-  call $assembly/index/LastValues#set:equity
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
-  global.get $~lib/memory/__stack_pointer
-  i32.const 12
-  i32.add
-  global.set $~lib/memory/__stack_pointer
-  local.get $0
- )
- (func $export:assembly/index/ReturnValue#get:unalteredGapValue (param $0 i32) (result i32)
+ (func $export:assembly/index/ReturnValue#get:balanceUnalteredGap (param $0 i32) (result i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
@@ -2672,7 +2651,7 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/ReturnValue#set:unalteredGapValue (param $0 i32) (param $1 i32)
+ (func $export:assembly/index/ReturnValue#set:balanceUnalteredGap (param $0 i32) (param $1 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.sub
@@ -2686,13 +2665,13 @@
   i32.store offset=4
   local.get $0
   local.get $1
-  call $assembly/index/ReturnValue#set:unalteredGapValue
+  call $assembly/index/ReturnValue#set:balanceUnalteredGap
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/ReturnValue#get:lastValue (param $0 i32) (result i32)
+ (func $export:assembly/index/ReturnValue#get:equity (param $0 i32) (result i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
@@ -2708,7 +2687,7 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/ReturnValue#set:lastValue (param $0 i32) (param $1 i32)
+ (func $export:assembly/index/ReturnValue#set:equity (param $0 i32) (param $1 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.sub
@@ -2722,15 +2701,87 @@
   i32.store offset=4
   local.get $0
   local.get $1
-  call $assembly/index/ReturnValue#set:lastValue
+  call $assembly/index/ReturnValue#set:equity
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/ReturnValue#constructor (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
+ (func $export:assembly/index/ReturnValue#get:equityLoop (param $0 i32) (result i32)
   global.get $~lib/memory/__stack_pointer
-  i32.const 20
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  i32.load offset=16
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/index/ReturnValue#set:equityLoop (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/index/ReturnValue#set:equityLoop
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/index/ReturnValue#get:equityUnalteredGap (param $0 i32) (result i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  i32.load offset=20
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/index/ReturnValue#set:equityUnalteredGap (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/index/ReturnValue#set:equityUnalteredGap
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/index/ReturnValue#constructor (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i32) (param $6 i32) (result i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 28
   i32.sub
   global.set $~lib/memory/__stack_pointer
   call $~stack_check
@@ -2749,44 +2800,118 @@
   global.get $~lib/memory/__stack_pointer
   local.get $4
   i32.store offset=16
+  global.get $~lib/memory/__stack_pointer
+  local.get $5
+  i32.store offset=20
+  global.get $~lib/memory/__stack_pointer
+  local.get $6
+  i32.store offset=24
   local.get $0
   local.get $1
   local.get $2
   local.get $3
   local.get $4
+  local.get $5
+  local.get $6
   call $assembly/index/ReturnValue#constructor
   global.get $~lib/memory/__stack_pointer
-  i32.const 20
+  i32.const 28
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $export:assembly/index/getValues (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
+ (func $export:assembly/index/findLoops (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 i32)
   global.get $~lib/memory/__stack_pointer
-  i32.const 16
+  i32.const 12
   i32.sub
   global.set $~lib/memory/__stack_pointer
   call $~stack_check
   global.get $~lib/memory/__stack_pointer
-  local.get $1
+  local.get $0
   i32.store
   global.get $~lib/memory/__stack_pointer
-  local.get $2
+  local.get $1
   i32.store offset=4
   global.get $~lib/memory/__stack_pointer
-  local.get $3
+  local.get $2
   i32.store offset=8
   global.get $~lib/memory/__stack_pointer
-  local.get $4
-  i32.store offset=12
+  i32.const 32
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store offset=8
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store offset=16
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store offset=24
+  global.get $~lib/memory/__stack_pointer
   local.get $0
+  local.get $2
+  call $assembly/index/getValues
+  local.tee $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
   local.get $1
   local.get $2
-  local.get $3
-  local.get $4
   call $assembly/index/getValues
+  local.tee $1
+  i32.store offset=4
   global.get $~lib/memory/__stack_pointer
-  i32.const 16
+  local.get $0
+  i32.load
+  local.tee $2
+  i32.store offset=8
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.load offset=4
+  local.tee $3
+  i32.store offset=12
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.load offset=8
+  local.tee $0
+  i32.store offset=16
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.load
+  local.tee $4
+  i32.store offset=20
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.load offset=4
+  local.tee $5
+  i32.store offset=24
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.load offset=8
+  local.tee $1
+  i32.store offset=28
+  i32.const 0
+  local.get $2
+  local.get $3
+  local.get $0
+  local.get $4
+  local.get $5
+  local.get $1
+  call $assembly/index/ReturnValue#constructor
+  global.get $~lib/memory/__stack_pointer
+  i32.const 32
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  global.get $~lib/memory/__stack_pointer
+  i32.const 12
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
+ ;; custom section "as-bind_bindings", size 370, contents: "{\"typeIds\":{\"assembly/index/ReturnValue\":{\"id\":5,\"byteSize\":24},\"~lib/typedarray/Float64Array\":{\"id\":3,\"byteSize\":12},\"~lib/array/Array<bool>\":{\"id\":4,\"byteSize\":16}},\"importedFunctions\":{},\"exportedFunctions\":{\"findLoops\":{\"returnType\":\"assembly/index/ReturnValue\",\"parameters\":[\"~lib/typedarray/Float64Array\",\"~lib/typedarray/Float64Array\",\"~lib/array/Array<bool>\"]}}}"
 )
